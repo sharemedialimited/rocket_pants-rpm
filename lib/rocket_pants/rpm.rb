@@ -6,14 +6,14 @@ module RocketPants
   module RPM
 
     DependencyDetection.defer do
-      @name = :rails4_controller
+      @name = :rails4_rocketpants_controller
 
       depends_on do
         defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 4
       end
 
       depends_on do
-        defined?(ActionController) && defined?(ActionController::Base)
+        defined?(RocketPants) && defined?(RocketPants::Base)
       end
 
       executes do
@@ -21,7 +21,7 @@ module RocketPants
       end
 
       executes do
-        class ActionController::Base
+        class RocketPants::Base
           include NewRelic::Agent::Instrumentation::ControllerInstrumentation
         end
         NewRelic::Agent::Instrumentation::ActionControllerSubscriber \
