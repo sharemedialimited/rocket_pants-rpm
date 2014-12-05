@@ -24,8 +24,8 @@ module RocketPants
         class RocketPants::Base
           include NewRelic::Agent::Instrumentation::ControllerInstrumentation
         end
-        NewRelic::Agent::Instrumentation::ActionControllerSubscriber \
-          .subscribe(/^process_action.rocket_pants$/)
+        ActiveSupport::Notifications.subscribe(/^process_action.rocket_pants$/,
+          NewRelic::Agent::Instrumentation::ActionControllerSubscriber.new)
       end
     end
 
