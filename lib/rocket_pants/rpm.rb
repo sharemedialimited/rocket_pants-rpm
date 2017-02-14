@@ -1,15 +1,15 @@
 require "rocket_pants/rpm/version"
 require "newrelic_rpm"
-require 'new_relic/agent/instrumentation/rails4/action_controller'
+require 'new_relic/agent/instrumentation/rails5/action_controller'
 
 module RocketPants
   module RPM
 
     DependencyDetection.defer do
-      @name = :rails4_rocketpants_controller
+      @name = :rails5_rocketpants_controller
 
       depends_on do
-        defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 4
+        defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 5
       end
 
       depends_on do
@@ -17,7 +17,7 @@ module RocketPants
       end
 
       executes do
-        ::NewRelic::Agent.logger.info 'Installing Rails 4 RocketPants Controller instrumentation'
+        ::NewRelic::Agent.logger.info 'Installing Rails 5 RocketPants Controller instrumentation'
       end
 
       executes do
